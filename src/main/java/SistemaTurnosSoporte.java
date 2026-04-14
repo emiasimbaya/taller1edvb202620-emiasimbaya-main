@@ -61,7 +61,7 @@ public class SistemaTurnosSoporte {
 
     public String atenderSiguienteTurno() {
         if (cola.isEmpty()) {
-            return null;
+            return "No hay turnos";
         }
         return cola.poll().toString();
     }
