@@ -1,0 +1,98 @@
+name: Autograding por metodos
+
+on:
+  push:
+  repository_dispatch:
+
+permissions:
+  checks: write
+  contents: read
+  actions: read
+
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+
+      - name: Metodo 1 - registrarTurno
+        id: registrar-turno
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Metodo 1 - registrarTurno
+          setup-command: ""
+          command: mvn -q -Dtest=RegistrarTurnoTest test
+          timeout: 10
+          max-score: 3
+
+      - name: Metodo 2 - verSiguienteTurno
+        id: ver-siguiente-turno
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Metodo 2 - verSiguienteTurno
+          setup-command: ""
+          command: mvn -q -Dtest=VerSiguienteTurnoTest test
+          timeout: 10
+          max-score: 1.5
+
+      - name: Metodo 3 - atenderSiguienteTurno
+        id: atender-siguiente-turno
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Metodo 3 - atenderSiguienteTurno
+          setup-command: ""
+          command: mvn -q -Dtest=AtenderSiguienteTurnoTest test
+          timeout: 10
+          max-score: 1.5
+
+      - name: Metodo 4 - obtenerCantidadTurnos
+        id: obtener-cantidad-turnos
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Metodo 4 - obtenerCantidadTurnos
+          setup-command: ""
+          command: mvn -q -Dtest=ObtenerCantidadTurnosTest test
+          timeout: 10
+          max-score: 1
+
+      - name: Metodo 5 - obtenerEspaciosDisponibles
+        id: obtener-espacios
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Metodo 5 - obtenerEspaciosDisponibles
+          setup-command: ""
+          command: mvn -q -Dtest=ObtenerEspaciosDisponiblesTest test
+          timeout: 10
+          max-score: 1.5
+
+      - name: Metodo 6 - mostrarCola
+        id: mostrar-cola
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Metodo 6 - mostrarCola
+          setup-command: ""
+          command: mvn -q -Dtest=MostrarColaTest test
+          timeout: 10
+          max-score: 1.5
+
+      - name: Autograding Reporter
+        uses: classroom-resources/autograding-grading-reporter@v1
+        env:
+          REGISTRAR-TURNO_RESULTS: "${{steps.registrar-turno.outputs.result}}"
+          VER-SIGUIENTE-TURNO_RESULTS: "${{steps.ver-siguiente-turno.outputs.result}}"
+          ATENDER-SIGUIENTE-TURNO_RESULTS: "${{steps.atender-siguiente-turno.outputs.result}}"
+          OBTENER-CANTIDAD-TURNOS_RESULTS: "${{steps.obtener-cantidad-turnos.outputs.result}}"
+          OBTENER-ESPACIOS_RESULTS: "${{steps.obtener-espacios.outputs.result}}"
+          MOSTRAR-COLA_RESULTS: "${{steps.mostrar-cola.outputs.result}}"
+        with:
+          runners: registrar-turno,ver-siguiente-turno,atender-siguiente-turno,obtener-cantidad-turnos,obtener-espacios,mostrar-cola
