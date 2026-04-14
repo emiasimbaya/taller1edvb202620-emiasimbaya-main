@@ -10,7 +10,7 @@ public class SistemaTurnosSoporte {
         cola = new LinkedList<>();
     }
 
-    public class Turno {
+    private class Turno {
         private String codigo;
         private String problema;
 
@@ -23,13 +23,9 @@ public class SistemaTurnosSoporte {
             return codigo;
         }
 
-        public String getProblema() {
-            return problema;
-        }
-
         @Override
         public String toString() {
-            return "Turno: " + codigo + " - Problema: " + problema;
+            return codigo + " - " + problema;
         }
     }
 
@@ -46,26 +42,26 @@ public class SistemaTurnosSoporte {
             return false;
         }
 
-        for (Turno t : cola) {
-            if (t.getCodigo().equals(codigo)) {
+        for (Turno turno : cola) {
+            if (turno.getCodigo().equals(codigo)) {
                 return false;
             }
         }
 
-        cola.add(new Turno(codigo, problema));
+        cola.offer(new Turno(codigo, problema));
         return true;
     }
 
     public String verSiguienteTurno() {
         if (cola.isEmpty()) {
-            return "No hay turnos";
+            return null;
         }
         return cola.peek().toString();
     }
 
     public String atenderSiguienteTurno() {
         if (cola.isEmpty()) {
-            return "No hay turnos";
+            return null;
         }
         return cola.poll().toString();
     }
@@ -80,13 +76,13 @@ public class SistemaTurnosSoporte {
 
     public String mostrarCola() {
         if (cola.isEmpty()) {
-            return "Cola vacía";
+            return "";
         }
 
-        String resultado = "";
-        for (Turno t : cola) {
-            resultado += t.toString() + "\n";
+        String texto = "";
+        for (Turno turno : cola) {
+            texto += turno.toString() + "\n";
         }
-        return resultado;
+        return texto.trim();
     }
 }

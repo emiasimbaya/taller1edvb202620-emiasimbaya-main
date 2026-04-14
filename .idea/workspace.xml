@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e3187237-5de5-4537-9493-2f90d8d1369e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qodana.yaml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/SistemaTurnosSoporte.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SistemaTurnosSoporte.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
