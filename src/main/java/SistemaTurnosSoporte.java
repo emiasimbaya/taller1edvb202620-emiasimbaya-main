@@ -54,14 +54,14 @@ public class SistemaTurnosSoporte {
 
     public String verSiguienteTurno() {
         if (cola.isEmpty()) {
-            return null;
+            return "No hay turnos";
         }
         return cola.peek().toString();
     }
 
     public String atenderSiguienteTurno() {
         if (cola.isEmpty()) {
-            return null;
+            return "No hay turnos";
         }
         return cola.poll().toString();
     }
