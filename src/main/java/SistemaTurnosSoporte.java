@@ -23,9 +23,13 @@ public class SistemaTurnosSoporte {
             return codigo;
         }
 
+        public String getProblema() {
+            return problema;
+        }
+
         @Override
         public String toString() {
-            return codigo + " - " + problema;
+            return codigo + " | " + problema;
         }
     }
 
@@ -51,7 +55,20 @@ public class SistemaTurnosSoporte {
         cola.offer(new Turno(codigo, problema));
         return true;
     }
-    
+
+    public String verSiguienteTurno() {
+        if (cola.isEmpty()) {
+            return "No hay turnos";
+        }
+        return cola.peek().toString();
+    }
+
+    public String atenderSiguienteTurno() {
+        if (cola.isEmpty()) {
+            return "No hay turnos";
+        }
+        return cola.poll().toString();
+    }
 
     public int obtenerCantidadTurnos() {
         return cola.size();
@@ -63,13 +80,13 @@ public class SistemaTurnosSoporte {
 
     public String mostrarCola() {
         if (cola.isEmpty()) {
-            return "";
+            return "Cola vacía";
         }
 
-        String texto = "";
+        String resultado = "";
         for (Turno turno : cola) {
-            texto += turno.toString() + "\n";
+            resultado += turno.toString() + "\n";
         }
-        return texto.trim();
+        return resultado.trim();
     }
 }
