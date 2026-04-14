@@ -51,20 +51,7 @@ public class SistemaTurnosSoporte {
         cola.offer(new Turno(codigo, problema));
         return true;
     }
-
-    public String verSiguienteTurno() {
-        if (cola.isEmpty()) {
-            return "No hay turnos";
-        }
-        return cola.peek().toString();
-    }
-
-    public String atenderSiguienteTurno() {
-        if (cola.isEmpty()) {
-            return "No hay turnos";
-        }
-        return cola.poll().toString();
-    }
+    
 
     public int obtenerCantidadTurnos() {
         return cola.size();
